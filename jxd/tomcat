@@ -1,0 +1,29 @@
+#!/bin/bash  
+# description: Tomcat Start Stop Restart  
+# processname: tomcat  
+# chkconfig: 234 20 80  
+case $1 in  
+start)  
+sh /usr/local/tomcat0/bin/startup.sh
+sh /usr/local/tomcat1/bin/startup.sh
+sh /usr/local/tomcat2/bin/startup.sh
+sh /usr/local/tomcat3/bin/startup.sh
+;;   
+stop)     
+sh /usr/local/tomcat0/bin/shutdown.sh
+sh /usr/local/tomcat1/bin/shutdown.sh
+sh /usr/local/tomcat2/bin/shutdown.sh
+sh /usr/local/tomcat3/bin/shutdown.sh
+;;   
+restart)  
+sh /usr/local/tomcat0/bin/shutdown.sh
+sh /usr/local/tomcat1/bin/shutdown.sh
+sh /usr/local/tomcat2/bin/shutdown.sh
+sh /usr/local/tomcat3/bin/shutdown.sh
+sh /usr/local/tomcat0/bin/startup.sh
+sh /usr/local/tomcat1/bin/startup.sh
+sh /usr/local/tomcat2/bin/startup.sh
+sh /usr/local/tomcat3/bin/startup.sh
+;;   
+esac      
+exit 0

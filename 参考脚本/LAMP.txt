@@ -1,0 +1,29 @@
+yum install epel-release vim gd-devel gcc-c++ pcre-devel libaio library libxml2-devel libmcrypt-devel -y
+
+http编译
+./configure --prefix=/usr/local/apache2 --with-z --with-included-apr --enable-so --enable-deflate=shared --enable-expires=shared --enable-rewrite=shared \
+--enable-static=support --with-pcre --with-apr-util --with-apr
+
+mysql初始化
+
+groupadd mysql	#添加mysql组
+useradd -g mysql mysql #添加mysql用户并添加到mysql组
+chown -R mysql:mysql mysql #修改文件目录归属于mysql
+chmod -R 755 mysql/
+
+
+./bin/mysqld --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --initialize-insecure
+
+ln -s libmysqlclient.so.20.3.5 libmysqlclient_r.so 创建链接否则PHP编译会报错
+php编译
+
+./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql/ --with-libxml-dir --with-png-dir --with-jpeg-dir \
+--with-freetype-dir --with-gd --with-zlib-dir --with-mcrypt --with-mysqli=/usr/local/mysql/bin/mysql_config --enable-soap --enable-mbstring=all --enable-sockets \
+--with-pdo_mysql --with-curl
+
+修改PHP时区
+date.timezone ='Asia/Shanghai'
+
+
+#关闭防火墙
+systemctl stop firewalld.service

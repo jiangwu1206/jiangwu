@@ -1,0 +1,73 @@
+#! /bin/sh
+# chkconfig: 2345 99 18
+# description:江吴编写用于开机及service方式启动停止MongoDB 28/10/2017
+start() {
+	isRun=$(ps aux | grep mongodb | grep -v grep | wc -l)
+	if [ 0 -lt $isRun ]
+	then
+		#echo "mongodb正在运行"
+		echo -e "\033[32mmongodb正在运行 \033[0m"
+	else
+		echo "正在启动mongodb"
+		#su -root -c "/usr/local/mongodb/bin/mongod --auth --dbpath=/databases/mongodbdata/data --fork --logpath=/databases/mongodbdata/logs/mongodb.log"
+		
+		isOk=$(ps aux | grep mongodb | grep -v grep | wc -l)
+		if [ 0 -lt $isOk ]
+		then
+			echo -e "\033[32m启动成功 \033[0m"
+		else
+				#echo "mongodb启动失败"
+			echo -e "\033[31m启动失败 \033[0m"
+		fi
+	fi
+}
+
+stop() {
+	isRun=$(ps aux | grep mongodb | grep -v grep | wc -l)
+	if [ 0 -lt $isRun ]
+	then
+		echo -e "\033[32m正在停止mongodb... \033[0m"
+		su -root -c "/usr/local/mongodb/bin/mongod --shutdown --dbpath=/databases/mongodbdata/data"
+		isOk=$(ps aux | grep mongodb | grep -v grep | wc -l)
+		if [ 0 -eq $isOk ]
+		then
+			echo -e "\033[32m停止成功 \033[0m"
+		else
+			echo -e "\033[31m停止失败 \033[0m"
+		fi
+	else
+		echo -e "\033[31mmongodb未运行 \033[0m"
+	fi
+}
+
+status() {
+	isRun=$(ps aux | grep mongodb | grep -v grep | wc -l)
+	if [ 0 -lt $isRun ]
+	then
+		#echo "mongodb正在运行"
+		echo -e "\033[32mmongodb正在运行 \033[0m"
+	else
+		echo -e "\033[32mmongodb未运行 \033[0m"
+	fi
+}
+case "$1" in  
+  start)  
+        start  
+        ;;  
+  stop)  
+        stop  
+        ;;
+  status)
+	status
+	;;  
+  restart)           
+       stop  
+       start  
+        ;;  
+   *)  
+        echo "参数错误!"  
+        echo $"Usage: $0 {start|stop|status|restart}"  
+        exit 1  
+        ;;  
+esac  
+exit $RETVAL  
