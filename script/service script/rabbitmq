@@ -1,0 +1,104 @@
+#! /bin/bash
+#
+# chkconfig: 2345 92 12
+#
+# description:rabbitmq
+#
+# set_env_path
+export ERLANG_HOME=/usr/bin
+#
+#
+#
+# Program_name
+#
+	NAME="rabbitmq"
+#
+#
+# Program_install_dir
+#
+	program_install_dir_prefix="/usr/local/"$NAME
+#
+#
+# execute_dir
+	execute=$program_install_dir_prefix/sbin/rabbitmq-server
+	
+	
+start() {
+	isRun=$(ps aux | grep $NAME | grep -v grep | wc -l)
+	if [ 0 -lt $isRun ]
+	then
+
+		echo -e "\033[32m$NAME正在运行 \033[0m"
+	else
+	
+		echo "尝试启动"$NAME
+		
+		
+		isOk=$(ps aux | grep $NAME | grep -v grep | wc -l)
+		if [ 0 -lt $isOk ]
+		then
+			echo -e "\033[32m$NAME启动成功 \033[0m"
+		else
+				
+			echo -e "\033[31m$NAME启动失败 \033[0m"
+		fi
+	fi
+}
+
+stop() {
+
+	isRun=$(ps aux | grep $NAME | grep -v grep | wc -l)
+	
+	if [ 0 -lt $isRun ]
+	then
+		echo -e "\033[32m尝试停止$NAME... \033[0m"
+		
+		isOk=$(ps aux | grep $NAME | grep -v grep | wc -l)
+		if [ 0 -eq $isOk ]
+		then
+			echo -e "\033[32m停止成功 \033[0m"
+		else
+			echo -e "\033[31m$NAME停止失败 \033[0m"
+		fi
+	else
+		echo -e "\033[31$NAME未运行 \033[0m"
+	fi
+}
+
+status() {
+			$execute status
+
+
+
+
+#	isRun=$(ps aux | grep $NAME | grep -v grep | wc -l)
+#	if [ 0 -lt $isRun ]
+#	then
+#		
+#		echo -e "\033[32m$NAME正在运行 \033[0m"
+#	else
+#		echo -e "\033[32m$NAME未运行 \033[0m"
+#	fi
+}
+case "$1" in  
+  start)  
+        start  
+        ;;  
+  stop)  
+        stop  
+        ;;
+  status)
+	status
+	;;  
+  restart)           
+       stop
+	   sleep 1
+       start  
+        ;;  
+   *)  
+        echo "参数错误!"  
+        echo $"Usage: $0 {start|stop|status|restart}"  
+        exit 1  
+        ;;  
+esac  
+exit $RETVAL  
