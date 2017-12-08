@@ -1,0 +1,117 @@
+#! /bin/bash
+#
+# chkconfig: 2345 93 11
+#
+# description:nginx
+#
+# set_env_path
+#
+#
+#
+# Program_name
+#
+	NAME="nginx"
+#
+# Program_install_dir
+#
+	program_install_dir_prefix="/usr/local/"$NAME
+#
+#
+# execute_file
+	execute=$program_install_dir_prefix/sbin/nginx
+#
+# pid_file
+    pid="/usr/local/nginx/pid/nginx.pid"
+#
+
+
+check(){
+
+	ps aux | grep $NAME | grep -v grep | grep -v bash |grep -v service | wc -l
+
+}
+	
+start() {
+	isRun=`check`
+	if [ 0 -lt $isRun ]
+	then
+
+		echo -e "\033[32m$NAME正在运行 \033[0m"
+	else
+	
+		echo "尝试启动"$NAME
+		$execute
+		sleep 1
+		isRun=`check`
+		if [ 0 -lt $isRun ]
+		then
+			echo -e "\033[32m$NAME启动成功 \033[0m"
+		else
+				
+			echo -e "\033[31m$NAME启动失败 \033[0m"
+		fi
+	fi
+}
+
+stop() {
+	isRun=`check`
+	
+	if [ 0 -lt $isRun ]
+	then
+		echo -e "\033[32m尝试停止$NAME... \033[0m"
+		#$execute stop
+		kill -15 $(cat $pid) 
+		sleep 1
+		isRun=`check`
+		if [ 0 -eq $isRun ]
+		then
+			echo -e "\033[32m停止成功 \033[0m"
+		else
+			echo -e "\033[31m$NAME停止失败 \033[0m"
+		fi
+	else
+		echo -e "\033[31$NAME未运行 \033[0m"
+	fi
+}
+
+#
+#reload_config_file
+
+reload(){
+	$execute -s reload
+}
+status() {
+	isRun=`check`
+	if [ 0 -lt $isRun ]
+	then
+		
+		echo -e "\033[32m$NAME正在运行 \033[0m"
+	else
+		echo $NAME"未运行"
+	fi
+}
+case "$1" in  
+  start)  
+        start  
+        ;;  
+  stop)  
+        stop  
+        ;;
+  status)
+	status
+	;;  
+  restart)           
+       stop
+	   sleep 1
+       start  
+        ;;
+  reload)
+	reload
+	  ;;
+   *)  
+        echo "参数错误!"  
+        echo $"Usage: $0 {start|stop|status|restart|reload}"  
+        exit 1  
+        ;;  
+esac  
+exit $RETVAL  
