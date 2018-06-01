@@ -1,0 +1,1 @@
+nip=192.168.1.$[$(sudo grep ip /boot/ip|awk -F . '{print $NF}'|awk -F / '{print $1}')+150];oip=$(sudo grep ip /boot/ip|awk -F = '{print $NF}'|awk -F / '{print $1}');sudo sed -i "s/$oip/$nip/g" /boot/ip;

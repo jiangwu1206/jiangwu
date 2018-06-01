@@ -2,27 +2,27 @@
 #
 # chkconfig: 2345 93 11
 #
-# description:nginx
-#
-# set_env_path
-#
+# description:redis
 #
 #
 # Program_name
 #
-	NAME="nginx"
+	NAME="redis"
 #
 # Program_install_dir
 #
-	program_install_dir_prefix="/usr/local/"$NAME
+	program_install_dir_prefix="/usr/local/redis"
 #
+# conf
+  conf="/usr/local/redis/etc/redis.conf"
 #
 # execute_file
-	execute=$program_install_dir_prefix/sbin/nginx
+	execute=$program_install_dir_prefix/bin/redis-server "$conf"
 #
 # pid_file
-    pid="/usr/local/nginx/logs/nginx.pid"
+    pid="/var/run/redis_6379.pid"
 #
+
 
 
 check(){
@@ -74,16 +74,10 @@ stop() {
 			echo -e "\033[31m$NAME停止失败 \033[0m"
 		fi
 	else
-		echo -e "\033[31m$NAME未运行 \033[0m"
+		echo -e "\033[31$NAME未运行 \033[0m"
 	fi
 }
 
-#
-#reload_config_file
-
-reload(){
-	$execute -s reload
-}
 status() {
 	isRun=`check`
 	if [ 0 -lt "$isRun" ]
@@ -108,13 +102,10 @@ case "$1" in
        stop
 	   sleep 1
        start  
-        ;;
-  reload)
-	reload
-	  ;;
+        ;;  
    *)  
         echo "参数错误!"  
-        echo $"Usage: $0 {start|stop|status|restart|reload}"  
+        echo $"Usage: $0 {start|stop|status|restart}"  
         exit 1  
         ;;  
 esac  

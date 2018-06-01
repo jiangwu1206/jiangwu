@@ -1,0 +1,2 @@
+yum install openssl-devel nurses-devel
+./configure --prefix=/usr/local/erlang/ --enable-kernel-poll --enable-sctp --enable-fips --enable-m64-build --with-ssl=

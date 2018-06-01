@@ -27,13 +27,17 @@
 
 check(){
 
-	ps aux | grep $NAME | grep -v grep | grep -v bash |grep -v service | wc -l
-
+	if [ -f $pid ]
+	then
+		ps aux | grep $(cat $pid) |grep -v grep | wc -l
+	else
+		echo 0
+	fi
 }
 	
 start() {
 	isRun=`check`
-	if [ 0 -lt $isRun ]
+	if [ 0 -lt "$isRun" ]
 	then
 
 		echo -e "\033[32m$NAME正在运行 \033[0m"
@@ -43,7 +47,7 @@ start() {
 		$execute
 		sleep 1
 		isRun=`check`
-		if [ 0 -lt $isRun ]
+		if [ 0 -lt "$isRun" ]
 		then
 			echo -e "\033[32m$NAME启动成功 \033[0m"
 		else
@@ -56,14 +60,14 @@ start() {
 stop() {
 	isRun=`check`
 	
-	if [ 0 -lt $isRun ]
+	if [ 0 -lt "$isRun" ]
 	then
 		echo -e "\033[32m尝试停止$NAME... \033[0m"
 		#$execute stop
 		kill -15 $(cat $pid) 
 		sleep 1
 		isRun=`check`
-		if [ 0 -eq $isRun ]
+		if [ 0 -eq "$isRun" ]
 		then
 			echo -e "\033[32m停止成功 \033[0m"
 		else
@@ -76,7 +80,7 @@ stop() {
 
 status() {
 	isRun=`check`
-	if [ 0 -lt $isRun ]
+	if [ 0 -lt "$isRun" ]
 	then
 		
 		echo -e "\033[32m$NAME正在运行 \033[0m"

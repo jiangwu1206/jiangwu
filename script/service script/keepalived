@@ -14,30 +14,30 @@
 #
 # Program_install_dir
 #
-	program_install_dir_prefix="/usr/local/"$NAME
+	program_install_dir_prefix="/usr/jiangwu/"$NAME
 #
 #
 # execute_file
 	execute=$program_install_dir_prefix/sbin/nginx
 #
 # pid_file
-    pid="/usr/local/nginx/logs/nginx.pid"
+    pid="/usr/jiangwu/nginx/logs/nginx.pid"
 #
 
 
 check(){
 
-	if [ -f $pid ]
+	if [-f $pid]
 	then
-		ps aux | grep $(cat $pid) |grep -v grep | wc -l
+		ps aux | grep $(cat $pid) | wc -l
 	else
-		echo 0
+		echo -e "\033[31m$NAME 找不到pid文件 \033[0m"
 	fi
 }
 	
 start() {
 	isRun=`check`
-	if [ 0 -lt "$isRun" ]
+	if [ 0 -lt $isRun ]
 	then
 
 		echo -e "\033[32m$NAME正在运行 \033[0m"
@@ -47,7 +47,7 @@ start() {
 		$execute
 		sleep 1
 		isRun=`check`
-		if [ 0 -lt "$isRun" ]
+		if [ 0 -lt $isRun ]
 		then
 			echo -e "\033[32m$NAME启动成功 \033[0m"
 		else
@@ -60,14 +60,14 @@ start() {
 stop() {
 	isRun=`check`
 	
-	if [ 0 -lt "$isRun" ]
+	if [ 0 -lt $isRun ]
 	then
 		echo -e "\033[32m尝试停止$NAME... \033[0m"
 		#$execute stop
 		kill -15 $(cat $pid) 
 		sleep 1
 		isRun=`check`
-		if [ 0 -eq "$isRun" ]
+		if [ 0 -eq $isRun ]
 		then
 			echo -e "\033[32m停止成功 \033[0m"
 		else
@@ -86,7 +86,7 @@ reload(){
 }
 status() {
 	isRun=`check`
-	if [ 0 -lt "$isRun" ]
+	if [ 0 -lt $isRun ]
 	then
 		
 		echo -e "\033[32m$NAME正在运行 \033[0m"

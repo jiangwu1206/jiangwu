@@ -1,0 +1,8 @@
+[Unit]
+Description=Keepalived
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/keepalived/sbin/keeplived
+ExecStop=
