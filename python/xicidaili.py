@@ -1,9 +1,22 @@
-﻿from pymongo import MongoClient
+﻿#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+from pymongo import MongoClient
 from lxml import etree
 import requests
 
-conn=MongoClient("192.168.201.130",27017)
-db=conn.test
+
+'''
+
+抓取西刺代理网站 免费代理IP存入Mongodb
+
+'''
+
+
+
+
+conn=MongoClient("10.0.6.211",27017)
+db=conn.proxyip
 my_set=db.t1
 
 headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"}
