@@ -20,7 +20,7 @@ db=conn.proxyip
 my_set=db.t1
 
 headers={"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36"}
-r=requests.get("http://www.xicidaili.com",headers=headers)
+r=requests.get("http://www.xicidaili.com/nn/",headers=headers)
 
 s=etree.HTML(r.text)
 #提取IP和端口存入mongodb
@@ -30,6 +30,7 @@ for i in s.xpath('//*[@id="ip_list"]/tr'):
     try:
        p["ip"]=d[0]
        p["port"]=d[1]
+       p["type"]=d[5]
        my_set.insert_one(p)
     except:
         continue
