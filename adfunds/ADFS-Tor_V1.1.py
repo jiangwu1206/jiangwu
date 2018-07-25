@@ -62,7 +62,13 @@ while True:
     name={}
     #定义点击次数;点击次数随机产生1至5之间
     cn=random.randint(5,8)
-    WEB=browser()
+    #尝试启动浏览器
+    try:
+        WEB=browser()
+    except:
+        print("浏览器启动异常")
+        WEB.quit()
+        continue
     
     #判断IP是否重复
     ip=IsReIP(WEB,IP)
