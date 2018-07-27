@@ -1,5 +1,8 @@
 import random
 
+'''
+常见显示屏分辨率
+'''
 
 class resolution:
 
