@@ -38,7 +38,7 @@ def browser():
     o.add_argument('--user-agent='+UA)
     #print(UA)
     o.add_argument('disable-infobars')
-    #o.add_argument('--headless')
+    o.add_argument('--headless')
     o.add_argument('--disable-gpu')
     px=re.random()
     print(px)
@@ -96,12 +96,13 @@ while True:
     
     try:
         WEB.get(link)
+        '''
         #模拟页面滚动浏览
         for j in range(random.randint(1,5)):
                 js="var q=document.documentElement.scrollTop="+str(random.randint(300,10000))
                 WEB.execute_script(js)
                 time.sleep(random.randint(2,5))
-           
+        '''   
         print(n)
         n+=1
     except:
@@ -110,6 +111,7 @@ while True:
         
     WEB.quit()
     dl.disconnect()
+    #time.sleep(random.randint(100,900))
 
 dl.logout()
 exit(0)

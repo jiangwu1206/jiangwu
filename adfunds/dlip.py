@@ -74,7 +74,7 @@ class ipjl:
                 print("连接成功")
                 return True
             else:
-                print("连接断开失败,请检查之前是否有建立连接")
+                print("连接失败,请检查之前是否有建立连接")
                 return False
         except:
             print("IP精灵异常,请检查IP精灵是否已运行")

@@ -1,5 +1,5 @@
 {
-"link":"http://www.zhixunwei.com",
+"link":"http://www.tenfey.com",
 "ad":{
 "ad1":"ad1"
 }
