@@ -3,6 +3,7 @@
 
 from selenium import webdriver
 from fake_useragent import UserAgent
+from resolution import resolution
 from dlip import ipjl
 import time
 import random
@@ -26,17 +27,22 @@ dl.open()
 #获取程序所在目录
 dir=sys.path[0]
 
+#实例化分辨率类
+re=resolution()
+
 #定义浏览器参数
 def browser():
     o=webdriver.ChromeOptions()
     ua=UserAgent()
     UA=ua.random
     o.add_argument('--user-agent='+UA)
-    print(UA)
+    #print(UA)
     o.add_argument('disable-infobars')
     #o.add_argument('--headless')
     o.add_argument('--disable-gpu')
-    o.add_argument('--window-size=1920,1080')
+    px=re.random()
+    print(px)
+    o.add_argument('--window-size='+px)
     #o.add_argument('--proxy-server=SOCKS5://127.0.0.1:1080')
     o.add_argument('log-level=3')
     return webdriver.Chrome(options=o)

@@ -24,5 +24,5 @@ class resolution:
     "2650,1600"
     ]
 
-    def random():
-        return resolution[random.randint(0,len(pc)-1)]
+    def random(self):
+        return self.pc[random.randint(0,len(self.pc)-1)]
