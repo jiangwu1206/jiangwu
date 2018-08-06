@@ -9,6 +9,7 @@ import time
 import random
 import json
 import sys
+import requests
 
 
 
@@ -48,17 +49,47 @@ def browser():
     return webdriver.Chrome(options=o)
 
 
-#判断IP是否重复
+#判断IP是否重复并记录
 def IsReIP(b,IP):
     b.get("http://ip.tenfey.com")
     ip=b.find_element_by_tag_name("body").text
     print(ip)
+    print('本地内中存判断')
     if ip in IP:
         print("IP重复使用正在自动更换IP")
         dl.disconnect()
         dl.connect()
         return IsReIP(b,IP)
+    else:
+        IP[ip]={}
+    try:    
+        print('远程数据库中判断')
+        postdata={}
+        postdata['ip']=ip.strip()
+        #ipcheck为True时证明数据库中已存在该IP
+        ipcheck=requests.post('http://ipcheck.tenfey.com/query/',data=postdata)
+        if 'True' == ipcheck:
+            print("IP重复使用正在自动更换IP")
+            dl.disconnect()
+            dl.connect()
+            return IsReIP(b,IP)
+        elif 'False' == ipcheck:
+            ipcheck=requests.post('http://ipcheck.tenfey.com/insert/',data=postdata)
+            if 'True' == ipcheck:
+                
+            elif 'False' == ipcheck:
+                print('IP记录远程数据库失败')
+            else:
+                print(ipcheck)
+        else:
+            print(ipcheck)
+    except:
+        print('远程验证失败,请检查网络是否正常')
+
     return ip
+
+
+
     
 #读取配置文件并转换为字典
 #读取配置文件并转换为字典
@@ -88,7 +119,6 @@ while True:
         WEB=browser()
         #判断IP是否重复
         ip=IsReIP(WEB,IP)
-        IP[ip]={}
     except:
         WEB.quit()
         continue
