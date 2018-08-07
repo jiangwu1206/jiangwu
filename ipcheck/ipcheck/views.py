@@ -18,13 +18,10 @@ def insert(request):
         try:     
             #获取请求参数
             ip=request.POST['ip'].strip()
-            sql='INSERT INTO ip VALUES("'+ip+'")'
-            print(sql)
             # 使用 cursor() 方法创建一个游标对象 cursor
             cursor = db.cursor()
-             
             # 使用 execute()  方法执行 SQL 查询 
-            if(cursor.execute(sql)):
+            if(cursor.execute('INSERT INTO ip VALUES(%s)',(ip))):
                 db.commit()
                 return HttpResponse('True')
             else:
@@ -52,15 +49,10 @@ def query(request):
         try:
             #获取请求参数
             ip=request.POST['ip'].strip()
-            print(ip)
-            #存在SQL注入风险
-            sql='SELECT * FROM ip WHERE ip="'+ip+'"'
-            print(sql)
             # 使用 cursor() 方法创建一个游标对象 cursor
             cursor = db.cursor()
-             
             # 使用 execute()  方法执行 SQL 查询 
-            if(cursor.execute(sql)):
+            if(cursor.execute('SELECT * FROM ip WHERE ip=%s',(ip))):
                 return HttpResponse('True')
             else:
                 return HttpResponse('False')
