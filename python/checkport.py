@@ -12,11 +12,11 @@ import socket
 
 def IsOpen(host,port):
     s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.settimeout(3)
+    s.settimeout(1)
     try:
         port=int(port)
         s.connect((host,port))
-        s.shutdown(2)       
+        s.shutdown(1)       
         print("ip:%s port:%d is open" %(host,port))
         return True
     except:
