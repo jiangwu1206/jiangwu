@@ -67,14 +67,14 @@ def IsReIP(b,IP):
         postdata={}
         postdata['ip']=ip.strip()
         #ipcheck为True时证明数据库中已存在该IP
-        ipcheck=requests.post('http://ipcheck.tenfey.com/query/',data=postdata)
+        ipcheck=requests.post('http://ipcheck.tenfey.com/query/',data=postdata).text
         if 'True' == ipcheck:
             print("IP重复使用正在自动更换IP")
             dl.disconnect()
             dl.connect()
             return IsReIP(b,IP)
         elif 'False' == ipcheck:
-            ipcheck=requests.post('http://ipcheck.tenfey.com/insert/',data=postdata)
+            ipcheck=requests.post('http://ipcheck.tenfey.com/insert/',data=postdata).text
             if 'True' == ipcheck:
                 pass
             elif 'False' == ipcheck:
