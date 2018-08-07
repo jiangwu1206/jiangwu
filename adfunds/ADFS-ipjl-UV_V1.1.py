@@ -76,7 +76,7 @@ def IsReIP(b,IP):
         elif 'False' == ipcheck:
             ipcheck=requests.post('http://ipcheck.tenfey.com/insert/',data=postdata)
             if 'True' == ipcheck:
-                
+                pass
             elif 'False' == ipcheck:
                 print('IP记录远程数据库失败')
             else:
