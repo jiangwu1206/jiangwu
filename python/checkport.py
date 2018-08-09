@@ -16,9 +16,7 @@ def IsOpen(host,port):
     try:
         port=int(port)
         s.connect((host,port))
-        s.shutdown(1)       
-        print("ip:%s port:%d is open" %(host,port))
+        s.shutdown(1)
         return True
     except:
-        print("ip:%s port:%d is down" %(host,port))
         return False
