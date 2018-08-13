@@ -27,8 +27,8 @@ def browser():
     return webdriver.Chrome(options=o)
 
 
-#判断IP是否重复并记录
-def IsReIP(b,IP):
+#判断IP是否重复并记录-代理精灵版本
+def dlIsReIP(b,IP,dl):
     b.get("http://ip.tenfey.com")
     ip=b.find_element_by_tag_name("body").text
     print(ip)
@@ -37,7 +37,7 @@ def IsReIP(b,IP):
         print("IP重复使用正在自动更换IP")
         dl.disconnect()
         dl.connect()
-        return IsReIP(b,IP)
+        return dlIsReIP(b,IP)
     else:
         IP[ip]={}
     try:    
@@ -50,7 +50,7 @@ def IsReIP(b,IP):
             print("IP重复使用正在自动更换IP")
             dl.disconnect()
             dl.connect()
-            return IsReIP(b,IP)
+            return IsReIP(b,IP,dl)
         elif 'False' == ipcheck:
             ipcheck=requests.post('http://ipcheck.tenfey.com/insert/',data=postdata).text
             if 'True' == ipcheck:
