@@ -43,15 +43,11 @@ n=1
 while True:
     #使用IP精灵
     dl.connect()
-    #广告名称
-    name={}
-    #定义外层for循环次数
-    cn=2
     
     try:
         WEB=browser()
         #判断IP是否重复
-        ip=IsReIP(WEB,IP)
+        ip=dlIsReIP(WEB,IP,dl)
     except:
         WEB.quit()
         continue    
