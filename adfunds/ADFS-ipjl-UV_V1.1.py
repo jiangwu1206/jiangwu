@@ -143,7 +143,7 @@ while True:
     dl.disconnect()
     if n==50 :
         exit(0)
-    time.sleep(random.randint(30,900))
+    time.sleep(random.randint(60,6000))
 
 dl.logout()
 exit(0)
