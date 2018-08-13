@@ -19,7 +19,7 @@ def browser():
     o.add_argument('disable-infobars')
     o.add_argument('--headless')
     o.add_argument('--disable-gpu')
-    px=re.random()
+    px=resolution().random()
     print(px)
     o.add_argument('--window-size=%s'%(px))
     #o.add_argument('--proxy-server=SOCKS5://127.0.0.1:1080')
