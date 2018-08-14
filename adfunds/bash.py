@@ -2,6 +2,7 @@
 # -*- coding: UTF-8 -*-
 
 from selenium import webdriver
+from checkport import IsOpen
 from fake_useragent import UserAgent
 from resolution import resolution
 import json
@@ -72,10 +73,14 @@ def socketIsReIP(IP):
         #获取代理IP由服务器随机返回一个
         print('开始获取代理IP')
         proxyip=requests.get('http://127.0.0.1:8080/getip/').text.strip()
-        print('开始验证代理IP:%s'%(proxyip))
-        ip=requests.get('http://ip.tenfey.com',proxies={'http': 'socks5://%s:1080'%(proxyip), 'https': 'socks5://%s:1080'%(proxyip)}).text.strip()
+        if IsOpen(proxyip,1080):
+            print('开始验证代理IP:%s'%(proxyip))
+            ip=requests.get('http://ip.tenfey.com',proxies={'http': 'socks5://%s:1080'%(proxyip), 'https': 'socks5://%s:1080'%(proxyip)},timeout=10).text.strip()
+        else:
+            print('获取的代理IP:%s不可用,正在更换'%(proxyip))
+            return socketIsReIP(IP)
     except:
-        print('获取的代理IP:%s不可用,正在更换'%(proxyip))
+        print('连接代理IP:%s超时,正在更换'%(proxyip))
         return socketIsReIP(IP)
     print(ip)
     print('本地内中存判断')
