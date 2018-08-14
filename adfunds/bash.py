@@ -72,7 +72,7 @@ def socketIsReIP(IP):
     try:
         #获取代理IP由服务器随机返回一个
         print('开始获取代理IP')
-        proxyip=requests.get('http://127.0.0.1:8080/getip/').text.strip()
+        proxyip=requests.get('http://ipcheck.tenfey.com/getip/').text.strip()
         if IsOpen(proxyip,1080):
             print('开始验证代理IP:%s'%(proxyip))
             ip=requests.get('http://ip.tenfey.com',proxies={'http': 'socks5://%s:1080'%(proxyip), 'https': 'socks5://%s:1080'%(proxyip)},timeout=10).text.strip()
