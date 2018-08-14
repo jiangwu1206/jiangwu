@@ -13,20 +13,14 @@ import sys
 import requests
 
 
-
-
 '''
-
 IP精灵版本
 IP精灵需加入环境变量中
-
 '''
-
 
 #打开IP精灵
 dl=ipjl()
 dl.open()
-
 
 #读取配置文件并转换为字典
 data=config()
@@ -43,11 +37,10 @@ n=1
 while True:
     #使用IP精灵
     dl.connect()
-    
     try:
         WEB=browser()
         #判断IP是否重复
-        ip=dlIsReIP(WEB,IP,dl)
+        ip=dlIsReIP(IP,dl)
     except:
         WEB.quit()
         continue    
@@ -68,7 +61,7 @@ while True:
         
     WEB.quit()
     dl.disconnect()
-    if n==50 :
+    if n==9 :
         exit(0)
     time.sleep(random.randint(60,6000))
 

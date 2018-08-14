@@ -44,7 +44,7 @@ while True:
     try:
         WEB=browser()
         #判断IP是否重复
-        ip=dlIsReIP(WEB,IP,dl)
+        ip=dlIsReIP(IP,dl)
         IP[ip]={}
     except:
         WEB.quit()
