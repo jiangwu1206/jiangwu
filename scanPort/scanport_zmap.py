@@ -23,7 +23,7 @@ def check(ip,port):
                 return 0
         except:
             return 0
-            
+        '''    
         try:
             # 打开数据库连接
             db = pymysql.connect("10.0.6.39","test","test","test")
@@ -53,11 +53,11 @@ def check(ip,port):
             del ip
             del db
             return 0
-
+        '''
         
 if __name__=='__main__':
     print(time.time())
-    p=subprocess.Popen('zmap -w cn.txt -p 1080 -o 1080.txt -B 5M')
+    p=subprocess.Popen('zmap -w cn.txt -p 1080 -o 1080.txt -B 5M',shell=True)
     time.sleep(2)
     file=open('1080.txt','r')
     port='1080'
