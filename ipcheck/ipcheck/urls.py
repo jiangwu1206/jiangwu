@@ -21,4 +21,5 @@ urlpatterns = [
     path('query/',views.query),
     path('insert/',views.insert),
     path('getip/',views.getip),
+    path('proxyipinsert/',views.proxyipinsert),
 ]

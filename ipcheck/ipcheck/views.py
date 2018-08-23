@@ -97,3 +97,35 @@ def getip(request):
     except:
         return HttpResponse('发生异常查询失败')
         db.close()
+
+#插入代理IP
+def proxyipinsert(request):
+    if request.method == 'POST':
+        try:
+            # 打开数据库连接
+            db = pymysql.connect("127.0.0.1","ip","adf123","iplist")
+        except:
+            return HttpResponse('连接数据库异常')
+        
+        try:     
+            #获取请求参数
+            ip=request.POST['ip'].strip()
+            # 使用 cursor() 方法创建一个游标对象 cursor
+            cursor = db.cursor()
+            # 使用 execute()  方法执行 SQL 查询 
+            if(cursor.execute('INSERT INTO proxy VALUES(%s)',(ip))):
+                db.commit()
+                return HttpResponse('True')
+            else:
+                return HttpResponse('False')
+
+             
+            # 关闭数据库连接
+            db.close()
+            
+        except:
+            return HttpResponse('发生异常插入失败')
+            db.close()
+    else:
+        return HttpResponse()
+        
