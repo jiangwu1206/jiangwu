@@ -9,6 +9,7 @@ import threading
  
 #检查目标IP是否可用
 def check(ip,port=1080):
+    print(ip,port)
     if IsOpen(ip,port):
         try:
             print(ip,port)
@@ -27,8 +28,9 @@ def forIPy(iprange):
     try:
         ipl=IPy.IP(iprange)
         for ip in ipl:
-            threading.Thread(target=check,args=(str(ip).strip(),)).start()
-            time.sleep(0.0005)
+            check(str(ip).strip())
+            #threading.Thread(target=check,args=(str(ip).strip(),)).start()
+            #time.sleep(0.0005)
 
     except Exception as e:
         print("forIPy",e)
@@ -38,7 +40,10 @@ if __name__=='__main__':
     file=open('cn.txt','r')
     pool=multiprocessing.Pool()
     for iprange in file:
+        #forIPy(iprange.strip())
         pool.apply_async(forIPy,args=(iprange.strip(),))
+        #threading.Thread(target=forIPy,args=(iprange.strip(),)).start()
+        time.sleep(0.0005)
     file.close()
     pool.close()
     pool.join()

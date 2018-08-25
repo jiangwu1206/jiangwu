@@ -16,11 +16,15 @@ def IsOpen(host,port):
     try:
         port=int(port)
         s.connect((host,port))
-        s.shutdown(1)
+        s.shutdown(2)
+        s.close()
         del host
         del port
+        del s
         return True
     except:
+        s.close()
         del host
         del port
+        del s
         return False
