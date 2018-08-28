@@ -13,7 +13,7 @@ def check(ip,port=1080):
     if IsOpen(ip,port):
         try:
             print(ip,port)
-            if requests.head('http://ip.tenfey.com',timeout=3,proxies={'http':'socks5://%s:1080'%(ip),'https':'socks5://%s:1080'%(ip)}).ok :
+            if requests.head('http://ip.tenfey.com',timeout=1,proxies={'http':'socks5://%s:1080'%(ip),'https':'socks5://%s:1080'%(ip)}).ok :
                 print('有效IP:%s'%(ip))
                 postdata={}
                 postdata['ip']=ip.strip()
@@ -43,7 +43,7 @@ if __name__=='__main__':
         #forIPy(iprange.strip())
         pool.apply_async(forIPy,args=(iprange.strip(),))
         #threading.Thread(target=forIPy,args=(iprange.strip(),)).start()
-        time.sleep(0.0005)
+        #time.sleep(0.0005)
     file.close()
     pool.close()
     pool.join()

@@ -1,0 +1,13 @@
+atms-eureka.git
+atms-user-center.git
+atms-task.git
+atms-wallet.git
+atms-incentive.git
+atms-trade.git
+eth-club.git
+eth-club-backend.git
+club-web.git
+tx-lcn.git
+timing-task.git
+club-admin.git
+atms-issue.git

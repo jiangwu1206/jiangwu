@@ -1,0 +1,15 @@
+mkdir -p /usr/local/dev/atms-src/
+cd /usr/local/dev/atms-src/
+git@git.atkj6666.com:chain-plus/atms-eureka.git
+git@git.atkj6666.com:chain-plus/atms-user-center.git
+git@git.atkj6666.com:blockchain/atms-task.git
+git@git.atkj6666.com:chain-plus/atms-wallet.git
+git@git.atkj6666.com:chain-plus/atms-incentive.git
+git@git.atkj6666.com:chain-plus/atms-trade.git
+git@git.atkj6666.com:chain-plus/eth-club.git
+git@git.atkj6666.com:chain-plus/eth-club-backend.git
+git@git.atkj6666.com:chain-plus/club-web.git
+git@git.atkj6666.com:common/tx-lcn.git
+git@git.atkj6666.com:chain-plus/timing-task.git
+git@git.atkj6666.com:chain-plus/club-admin.git
+git@git.atkj6666.com:chain-plus/atms-issue.git
