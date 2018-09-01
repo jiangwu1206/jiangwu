@@ -9,5 +9,5 @@
 ./restart.sh  eth-club-backend dev
 cd club-web/
 git pull origin dev > /www/logs/atms/club-web.log
-cd club-admin/
+cd ../club-admin/
 git pull origin dev > /www/logs/atms/club-admin.log
