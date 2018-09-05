@@ -14,20 +14,11 @@ else
 fi
 echo ’当前执行分支为：$branch，jvm参数为 $jvmargs ‘
 cd /usr/local/dev/atms-src/$1
-git pull
 git checkout $branch
-mvn clean install -U  -Psimulate -DskipTests=true
-echo "延时1秒"
-sleep 1
-echo "停止$1服务"
-supervisorctl stop $1
+git pull
+mvn clean install -U  -Ptest -DskipTests=true
 rm -rf /usr/local/deploy/webapps/
 mkdir -p /usr/local/atms/$1/
-alias cp='cp -i'
-unalias cp
-cp -rf /usr/local/dev/atms-src/$1/target/$1.jar /usr/local/atms/$1/
-echo "延时1秒"
-sleep 1
-echo "启动$1服务"
-supervisorctl start $1
-alias cp='cp -i'
+cp -R /usr/local/dev/atms-src/$1/target/$1.jar /usr/local/atms/$1/
+ps -efww|grep -w $1 |grep -v grep|cut -c 9-15|xargs kill -9
+nohup java -jar $jvmargs /usr/local/atms/$1/$1.jar --spa=test --spring.profiles.active=test &

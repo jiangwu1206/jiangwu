@@ -5,11 +5,10 @@
 ./restart.sh  atms-wallet dev
 ./restart.sh  atms-incentive dev
 ./restart.sh  atms-trade dev
-./restart.sh  timing-task dev
 ./restart.sh  atms-issue dev
 ./restart.sh  eth-club dev
 ./restart.sh  eth-club-backend dev
 cd club-web/
 git pull origin dev > /www/logs/atms/club-web.log
-cd ../club-admin/
+cd club-admin/
 git pull origin dev > /www/logs/atms/club-admin.log
