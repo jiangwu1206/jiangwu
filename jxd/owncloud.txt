@@ -1,1 +1,0 @@
-owncloudcmd --user jiangwu --password jiangwu . http://jxd.tenfey.com:800/owncloud

@@ -1,7 +1,0 @@
-[isv_ownCloud_desktop]
-name=isv:ownCloud:desktop (RHEL_7)
-type=rpm-md
-baseurl=http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/RHEL_7/
-gpgcheck=1
-gpgkey=http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/RHEL_7/repodata/repomd.xml.key
-enabled=1
