@@ -1,0 +1,30 @@
+
+
+php 5.6
+
+./configure --prefix=/usr/local/php \
+--enable-fpm \
+--with-fpm-user=apache \
+--with-fpm-group=apache \
+--disable-ipv6 \
+--with-openssl \
+--with-pcre-regex \
+--with-zlib \
+--with-bz2 \
+--with-curl \
+--with-gd \
+--enable-mbstring \
+--with-mysql \
+--enable-opcache \
+--enable-mysqlnd \
+--with-libxml-dir \
+--with-jpeg-dir \
+--with-png-dir \
+--with-zlib-dir \
+--with-freetype-dir \
+--with-gettext \
+--with-mhash \
+--with-ldap \
+--with-mcrypt \
+--with-pdo-mysql \
+--with-pcre-dir
