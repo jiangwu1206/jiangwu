@@ -1,5 +1,5 @@
 #!/bin/bash
-domain="domain"
+domain="domainz"
 user="user"
 pwd="pwd"
 ip=`curl -s ip.tenfey.com`
