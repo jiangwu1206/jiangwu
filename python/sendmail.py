@@ -23,8 +23,8 @@ message['Subject'] = Header(subject, 'utf-8')
  
  
 try:
-    smtpObj = smtplib.SMTP() 
-    smtpObj.connect(mail_host, 25)    # 25 为 SMTP 端口号
+    smtpObj = smtplib.SMTP(mail_host, 25)
+    #smtpObj = smtplib.SMTP_SSL(mail_host, 465) #TLS方式
     smtpObj.login(mail_user,mail_pass)  
     smtpObj.sendmail(sender, receivers, message.as_string())
     print ("邮件发送成功")
