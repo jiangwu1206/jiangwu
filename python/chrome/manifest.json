@@ -1,0 +1,14 @@
+{
+  "name": "webdriver",
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "修改webdriver属性",
+  
+  "content_scripts": [
+    {
+	  "js": ["js/log.js"],
+      "matches": ["<all_urls>"],
+	  "run_at": "document_start"
+    }
+  ]
+}
